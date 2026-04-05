@@ -7,6 +7,6 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v4 
       - name: Build image
-        run: docker build -t rimakanm/portfolio-app .
+        run: docker build -t {{ secrets.DOCKER_USERNAME }}/portfolio-app .
       - name: List images
         run: docker images
