@@ -19,6 +19,6 @@ jobs:
         runs-on: ubuntu-latest
     
         steps:
-          needs: build  
+        needs: build  
         - name: Hello world
           run: echo "Hello, World!"
