@@ -1,24 +1,12 @@
-name: My first pipeline 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
+name: My first pipeline
+on: push
 jobs:
-    build:
-        runs-on: ubuntu-latest
-    
-        steps:
-        - name: Set up Python 3.8
-          run: uptime
-        - name: Number processors
-          run: nproc
-       
-    test:
-        runs-on: ubuntu-latest
-        needs: build 
-        steps:
-         
-        - name: Hello world
-          run: echo "Hello, World!"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4 
+      - name: Build image
+        run: docker build -t rimakanm/portfolio-app .
+      - name: List images
+        run: docker images
