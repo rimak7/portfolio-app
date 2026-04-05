@@ -1,0 +1,23 @@
+name: My first pipeline 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+    
+        steps:
+        - name: Set up Python 3.8
+          run: uptime
+        - name: Number processors
+          run: nproc
+       
+    test:
+        runs-on: ubuntu-latest
+    
+        steps:
+        - name: Hello world
+          run: echo "Hello, World!"
