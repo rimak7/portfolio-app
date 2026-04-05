@@ -36,4 +36,4 @@ jobs:
               docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
               docker stop portfolio-app || true
               docker rm -f portfolio-app || echo "No container to remove"
-              docker run -d -p 80:80 --name portfolio-app ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
+              docker run -d -p 8080:80 --name portfolio-app ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
