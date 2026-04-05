@@ -20,3 +20,20 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/portfolio-app:${{ github.run_number }}    
           docker push ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest    
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: ssh to linux and deploy
+        uses: appleboy/ssh-action@v1
+        with:
+         host: ${{ secrets.HOST }}
+         username: ${{ secrets.USERNAME }}
+         key: ${{ secrets.KEY }}
+        #  port: ${{ secrets.PORT }}
+         script: |
+              docker pull ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
+              docker stop portfolio-app || true
+              docker rm -f portfolio-app || echo "No container to remove"
+              docker run -d -p 80:80 --name portfolio-app ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
